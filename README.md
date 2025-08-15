@@ -6,8 +6,10 @@
 <img src="https://github.com/4PS21EC086/5185594_NANDITHA-H-N/blob/main/certificategit.jpeg?raw=true" alt="GIT Certificate" width="100%">
 
 ## Sololearn certificate
-<img src="https://gitthub.com/4PS21EC086/5185594_NANDITHA-H-N/blob/main/cprogrammingcertificate.jpg?raw=true" alt="Sololearn certificate" width="100%">
-## Linux commands
-<img src="" alt="Linux commands" width="100%">
+<img src="https://github.com/4PS21EC086/5185594_NANDITHA-H-N/blob/main/cprogrammingcertificate.jpg?raw=true" alt="Sololearn certificate" width="100%">
+
+## Linux Commands
+<img src="https://github.com/4PS21EC086/5185594_NANDITHA-H-N/blob/main/cprogrammingcertificate.jpg?raw=true" alt="Sololearn certificate" width="100%">
+
 
 
