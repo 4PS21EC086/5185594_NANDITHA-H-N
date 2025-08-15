@@ -1,4 +1,4 @@
 # 5185594_NANDITHA-H-N
-![image alt]https://github.com/4PS21EC086/5185594_NANDITHA-H-N/blob/main/ssgreatlearning.jpeg?raw=true
+https://github.com/4PS21EC086/5185594_NANDITHA-H-N/blob/main/ssgreatlearning.jpeg?raw=true
 
 
