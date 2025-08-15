@@ -1,6 +1,6 @@
 # 5185594_NANDITHA-H-N
 ## Agile Completion
-<img src="(https://github.com/user-attachments/assets/56820f42-5247-4ec4-9d05-f6b465b6c256)" alt="Agile Completion" width="100%">
+<img src="https://github.com/4PS21EC086/5185594_NANDITHA-H-N/blob/main/ssgreatlearning.jpeg?raw=true" alt="Agile Completion" width="100%">
 
 ## GIT Certificate
 <img src="https://github.com/4PS21EC086/5185594_NANDITHA-H-N/blob/main/certificategit.jpeg?raw=true" alt="GIT Certificate" width="100%">
