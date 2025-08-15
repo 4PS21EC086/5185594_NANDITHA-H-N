@@ -6,6 +6,6 @@
 <img src="![Image](https://github.com/user-attachments/assets/a94dedbc-4d95-4e05-8c94-c7f124e8f935)" alt="GIT Certificate" width="100%">
 
 ## Sololearn certificate
-<img src="PATH_TO_IMAGE" alt="Sololearn certificate" width="100%">
+<img src="![Image](https://github.com/user-attachments/assets/cb75f8e9-7930-4d65-b62c-eb17cf7bdfc8)" alt="Sololearn certificate" width="100%">
 
 
