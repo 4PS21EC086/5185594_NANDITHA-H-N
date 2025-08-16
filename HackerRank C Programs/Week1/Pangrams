@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+char* pangrams(char s[]) {
+    int seen[26] = {0};  // Array to track letters a-z
+    int count = 0;
+
+    for (int i = 0; s[i] != '\0'; i++) {
+        if (isalpha(s[i])) {
+            char lower = tolower(s[i]);
+            int index = lower - 'a';
+            if (seen[index] == 0) {
+                seen[index] = 1;
+                count++;
+            }
+        }
+    }
+
+    if (count == 26)
+        return "pangram";
+    else
+        return "not pangram";
+}
+
+int main() {
+    char s[1005];   // max length = 10^3
+    fgets(s, sizeof(s), stdin);  // read input string with spaces
+    
+    // remove trailing newline if present
+    s[strcspn(s, "\n")] = '\0';
+    
+    printf("%s\n", pangrams(s));
+    return 0;
+}
