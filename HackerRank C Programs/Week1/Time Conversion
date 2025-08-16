@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+void timeConversion(char* s) {
+    int hour;
+    char time[9]; // HH:MM:SS
+    char period[3]; // AM or PM
+
+    // Extract hour, minutes, seconds, and AM/PM
+    sscanf(s, "%2d:%*2d:%*2d%2s", &hour, period);  // Read hour and period (AM/PM)
+
+    // Adjust hour based on AM/PM
+    if (strncmp(s + 8, "AM", 2) == 0) {
+        if (hour == 12) hour = 0;
+    } else {
+        if (hour != 12) hour += 12;
+    }
+
+    // Print formatted 24-hour time
+    printf("%02d:%.2s:%.2s\n", hour, s + 3, s + 6);
+}
+
+int main() {
+    char s[11];  // e.g., "07:05:45PM"
+    scanf("%s", s);
+    timeConversion(s);
+    return 0;
+}
