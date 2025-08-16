@@ -1,0 +1,73 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// This function finds the maximum of four integers.
+int max(int a, int b, int c, int d) {
+    int max_val = a;
+    if (b > max_val) {
+        max_val = b;
+    }
+    if (c > max_val) {
+        max_val = c;
+    }
+    if (d > max_val) {
+        max_val = d;
+    }
+    return max_val;
+}
+
+int flippingMatrix(int matrix_rows, int matrix_cols, int** matrix) {
+    int sum = 0;
+    // 'n' is the size of the quadrant we are interested in.
+    int n = matrix_rows / 2;
+    
+    // Iterate through each position (i, j) in the top-left quadrant.
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            // These are the four elements that can be moved to position (i, j)
+            // through a series of row/column flips.
+            int val1 = matrix[i][j];
+            int val2 = matrix[i][2 * n - 1 - j];
+            int val3 = matrix[2 * n - 1 - i][j];
+            int val4 = matrix[2 * n - 1 - i][2 * n - 1 - j];
+            
+            // To maximize the sum, we must choose the largest of these four values
+            // and add it to our total sum.
+            sum += max(val1, val2, val3, val4);
+        }
+    }
+    return sum;
+}
+
+// Below is a sample main function to test the flippingMatrix logic.
+// The actual input handling on platforms like HackerRank may differ.
+int main() {
+    int q;
+    scanf("%d", &q);
+    
+    while (q--) {
+        int n;
+        scanf("%d", &n);
+        int size = 2 * n;
+        
+        // Dynamically allocate a 2D array.
+        int** matrix = (int**)malloc(size * sizeof(int*));
+        for (int i = 0; i < size; i++) {
+            matrix[i] = (int*)malloc(size * sizeof(int));
+            for (int j = 0; j < size; j++) {
+                scanf("%d", &matrix[i][j]);
+            }
+        }
+        
+        int result = flippingMatrix(size, size, matrix);
+        printf("%d\n", result);
+        
+        // Free the dynamically allocated memory.
+        for (int i = 0; i < size; i++) {
+            free(matrix[i]);
+        }
+        free(matrix);
+    }
+    
+    return 0;
+}
