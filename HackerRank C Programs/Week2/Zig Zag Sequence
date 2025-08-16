@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+
+// Comparison function for qsort
+int compare(const void *a, const void *b) {
+    return (*(int *)a - *(int *)b);
+}
+
+// Function to find the lexicographically smallest zigzag sequence
+void findZigZagSequence(int a_count, int* a) {
+    qsort(a, a_count, sizeof(int), compare);
+    
+    // Calculate the pivot point for the zigzag sequence.
+    int mid_idx = (a_count - 1) / 2;
+    
+    // Swap the middle element with the last element.
+    int temp = a[mid_idx];
+    a[mid_idx] = a[a_count - 1];
+    a[a_count - 1] = temp;
+    
+    // Reverse the elements from the middle to the end.
+    int st = mid_idx + 1;
+    int ed = a_count - 2;
+    
+    while(st < ed) {
+        int temp_rev = a[st];
+        a[st] = a[ed];
+        a[ed] = temp_rev;
+        st++;
+        ed--;
+    }
+    
+    for (int i = 0; i < a_count; i++) {
+        printf("%d ", a[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    int t;
+    scanf("%d", &t);
+    
+    while (t--) {
+        int n;
+        scanf("%d", &n);
+        
+        int* a = (int*)malloc(n * sizeof(int));
+        for (int i = 0; i < n; i++) {
+            scanf("%d", &a[i]);
+        }
+        
+        findZigZagSequence(n, a);
+        
+        free(a);
+    }
+    
+    return 0;
+}
