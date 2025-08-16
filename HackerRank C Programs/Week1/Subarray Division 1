@@ -1,0 +1,37 @@
+#include <stdio.h>
+
+int birthday(int s_count, int* s, int d, int m) {
+    int count = 0;
+    for (int i = 0; i <= s_count - m; i++) {
+        int sum = 0;
+        for (int j = 0; j < m; j++) {
+            sum += s[i + j];
+        }
+        if (sum == d) {
+            count++;
+        }
+    }
+    return count;
+}
+
+int main() {
+    int n, d, m;
+    
+    // Read the number of squares in the chocolate bar
+    scanf("%d", &n);
+    
+    // Read the numbers on the chocolate squares
+    int s[n];
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &s[i]);
+    }
+    
+    // Read Ron's birth day and his birth month
+    scanf("%d %d", &d, &m);
+    
+    // Call the birthday function and print the result
+    int result = birthday(n, s, d, m);
+    printf("%d\n", result);
+    
+    return 0;
+}
