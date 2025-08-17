@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Compare function for qsort
+int cmp(const void *a, const void *b) {
+    long long x = *(long long*)a;
+    long long y = *(long long*)b;
+    if (x < y) return -1;
+    if (x > y) return 1;
+    return 0;
+}
+
+int main() {
+    int n, k;
+    scanf("%d", &n);
+    scanf("%d", &k);
+
+    long long arr[n];
+    for (int i = 0; i < n; i++) {
+        scanf("%lld", &arr[i]);
+    }
+
+    // Sort the array
+    qsort(arr, n, sizeof(long long), cmp);
+
+    long long unfairness = 10000000000LL; // large initial value
+
+    // Check windows of size k
+    for (int i = 0; i <= n - k; i++) {
+        long long diff = arr[i + k - 1] - arr[i];
+        if (diff < unfairness) {
+            unfairness = diff;
+        }
+    }
+
+    printf("%lld\n", unfairness);
+    return 0;
+}
