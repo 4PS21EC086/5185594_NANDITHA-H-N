@@ -1,0 +1,22 @@
+#include <stdio.h>
+
+int towerBreakers(int n, int m) {
+    if (m == 1) {
+        return 2;  // all towers already height 1, no moves
+    }
+    if (n % 2 == 0) {
+        return 2;  // Player 2 can always mirror Player 1
+    }
+    return 1;      // Player 1 wins when n is odd and m > 1
+}
+
+int main() {
+    int t;
+    scanf("%d", &t);
+    while (t--) {
+        int n, m;
+        scanf("%d %d", &n, &m);
+        printf("%d\n", towerBreakers(n, m));
+    }
+    return 0;
+}
