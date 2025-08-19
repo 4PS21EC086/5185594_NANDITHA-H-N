@@ -1,1 +1,55 @@
+#include <stdio.h>
+#include <stdlib.h>
 
+void minimumBribes(int arr_count, int* arr) {
+    int bribes = 0;
+    int chaotic = 0;
+
+    for (int i = 0; i < arr_count; i++) {
+        // Check if the current person has bribed more than 2 people
+        // A person's initial position is `i+1`.
+        // If their final position `arr[i]` is more than two places ahead of their
+        // initial position, it means they have bribed more than two people.
+        if (arr[i] - (i + 1) > 2) {
+            chaotic = 1;
+            break;
+        }
+
+        // Count the number of people who bribed the current person
+        // To do this, we look at the people in front of the current person (from j=0 to i-1).
+        // If a person at `arr[j]` is greater than the current person `arr[i]`,
+        // it means `arr[j]` was originally behind `arr[i]` and bribed their way ahead.
+        // We only need to check for people who are within 2 positions of the
+        // current person's original position, because those are the only people
+        // the current person could have bribed to move ahead.
+        // The more efficient way is to check from the current person's final position
+        // and go backwards.
+        for (int j = i - 1; j >= 0; j--) {
+            if (arr[j] > arr[i]) {
+                bribes++;
+            }
+        }
+    }
+
+    if (chaotic) {
+        printf("Too chaotic\n");
+    } else {
+        printf("%d\n", bribes);
+    }
+}
+
+int main() {
+    int t;
+    scanf("%d", &t);
+    while (t--) {
+        int n;
+        scanf("%d", &n);
+        int* q = (int*)malloc(n * sizeof(int));
+        for (int i = 0; i < n; i++) {
+            scanf("%d", &q[i]);
+        }
+        minimumBribes(n, q);
+        free(q);
+    }
+    return 0;
+}
