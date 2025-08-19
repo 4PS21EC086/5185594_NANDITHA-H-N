@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <string.h>
+
+int anagram(char* s) {
+    int n = strlen(s);
+    if (n % 2 != 0) {
+        return -1;
+    }
+
+    int half = n / 2;
+    char s1[half + 1];
+    char s2[half + 1];
+
+    strncpy(s1, s, half);
+    s1[half] = '\0';
+    strcpy(s2, s + half);
+
+    int freq1[26] = {0};
+    int freq2[26] = {0};
+
+    for (int i = 0; i < half; i++) {
+        freq1[s1[i] - 'a']++;
+        freq2[s2[i] - 'a']++;
+    }
+
+    int changes = 0;
+    for (int i = 0; i < 26; i++) {
+        if (freq1[i] > freq2[i]) {
+            changes += freq1[i] - freq2[i];
+        }
+    }
+    
+    return changes;
+}
+
+int main() {
+    int q;
+    scanf("%d", &q);
+    while (q--) {
+        char s[10001];
+        scanf("%s", s);
+        printf("%d\n", anagram(s));
+    }
+    return 0;
+}
