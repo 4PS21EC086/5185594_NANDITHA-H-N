@@ -2,19 +2,16 @@
 #include <stdlib.h>
 #include <string.h>
 
-// Function to check if a string is valid
-// The function signature provided in the prompt is for C++ or Java.
-// Here's the C implementation
+
 char* isValid(char* s) {
     int freq[26] = {0};
     int len = strlen(s);
 
-    // 1. Calculate character frequencies
+    
     for (int i = 0; i < len; i++) {
         freq[s[i] - 'a']++;
     }
 
-    // 2. Count the frequencies of the frequencies
     int freq_of_freq[len + 1];
     for (int i = 0; i < len + 1; i++) {
         freq_of_freq[i] = 0;
@@ -26,7 +23,7 @@ char* isValid(char* s) {
         }
     }
 
-    // 3. Analyze the frequency of frequencies
+   
     int distinct_freqs = 0;
     int freq1 = 0, count1 = 0;
     int freq2 = 0, count2 = 0;
@@ -44,33 +41,21 @@ char* isValid(char* s) {
         }
     }
 
-    // Case 1: All characters have the same frequency.
     if (distinct_freqs <= 1) {
         return "YES";
     }
 
-    // Case 2: There are two distinct frequencies.
     if (distinct_freqs == 2) {
-        // Condition A: One character appears only once (freq of 1), and all others have the same frequency.
-        // E.g., "aabbc" -> freqs {a:2, b:2, c:1}.  freq_of_freq {1:1, 2:2}.
-        // The one character with freq of 1 is the one we can remove.
+        
         if ((freq1 == 1 && count1 == 1) || (freq2 == 1 && count2 == 1)) {
             return "YES";
         }
         
-        // Condition B: One group of characters has a frequency that is
-        // exactly one more than the other group.
-        // E.g., "aabbcccd" -> freqs {a:2, b:2, c:3, d:1}. This fails.
-        // Let's take "aabbccc". freqs {a:2, b:2, c:3}. freq_of_freq {2:2, 3:1}.
-        // Here, we can remove one 'c' to make all frequencies 2.
-        // The condition is: one of the groups has count 1, and its frequency is
-        // exactly one more than the other group's frequency.
         if ((count1 == 1 && freq1 == freq2 + 1) || (count2 == 1 && freq2 == freq1 + 1)) {
             return "YES";
         }
     }
 
-    // All other cases are not valid.
     return "NO";
 }
 
