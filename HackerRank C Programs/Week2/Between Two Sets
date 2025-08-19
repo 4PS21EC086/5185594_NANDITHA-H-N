@@ -1,0 +1,62 @@
+#include <stdio.h>
+
+// Function to calculate the greatest common divisor (GCD) of two numbers
+int gcd(int a, int b) {
+    while (b) {
+        int temp = b;
+        b = a % b;
+        a = temp;
+    }
+    return a;
+}
+
+// Function to calculate the least common multiple (LCM) of two numbers
+int lcm(int a, int b) {
+    if (a == 0 || b == 0) {
+        return 0;
+    }
+    return (a * b) / gcd(a, b);
+}
+
+int getTotalX(int a_count, int* a, int b_count, int* b) {
+    // Find the LCM of all elements of array a
+    int result_lcm = a[0];
+    for (int i = 1; i < a_count; i++) {
+        result_lcm = lcm(result_lcm, a[i]);
+    }
+
+    // Find the GCD of all elements of array b
+    int result_gcd = b[0];
+    for (int i = 1; i < b_count; i++) {
+        result_gcd = gcd(result_gcd, b[i]);
+    }
+
+    // Count the number of multiples of result_lcm that evenly divide result_gcd
+    int count = 0;
+    for (int i = result_lcm; i <= result_gcd; i += result_lcm) {
+        if (result_gcd % i == 0) {
+            count++;
+        }
+    }
+    return count;
+}
+
+int main() {
+    int n, m;
+    scanf("%d %d", &n, &m);
+
+    int a[n];
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &a[i]);
+    }
+
+    int b[m];
+    for (int i = 0; i < m; i++) {
+        scanf("%d", &b[i]);
+    }
+
+    int result = getTotalX(n, a, m, b);
+    printf("%d\n", result);
+
+    return 0;
+}
