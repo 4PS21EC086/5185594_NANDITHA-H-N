@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <math.h>
+
+// Function to find the largest power of 2 less than or equal to n
+long long largestPowerOf2(long long n) {
+    if (n == 0) {
+        return 0;
+    }
+    long long power = 1;
+    while (power * 2 <= n) {
+        power *= 2;
+    }
+    return power;
+}
+
+char* counterGame(long long n) {
+    int turns = 0;
+    while (n > 1) {
+        if ((n & (n - 1)) == 0) { // Check if n is a power of 2
+            n /= 2;
+        } else {
+            n -= largestPowerOf2(n);
+        }
+        turns++;
+    }
+
+    if (turns % 2 == 1) {
+        return "Louise";
+    } else {
+        return "Richard";
+    }
+}
+
+int main() {
+    int t;
+    scanf("%d", &t);
+    while (t--) {
+        long long n;
+        scanf("%lld", &n);
+        printf("%s\n", counterGame(n));
+    }
+    return 0;
+}
