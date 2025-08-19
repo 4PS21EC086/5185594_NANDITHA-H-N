@@ -1,0 +1,52 @@
+#include <stdio.h>
+#include <string.h>
+
+// Function to check if a substring is a palindrome
+int isPalindrome(char *s, int start, int end) {
+    while (start < end) {
+        if (s[start] != s[end]) {
+            return 0; // Not a palindrome
+        }
+        start++;
+        end--;
+    }
+    return 1; // Is a palindrome
+}
+
+// Function to find the index to remove to make a palindrome
+int palindromeIndex(char* s) {
+    int n = strlen(s);
+    int start = 0;
+    int end = n - 1;
+
+    while (start < end) {
+        if (s[start] != s[end]) {
+            // Check if removing the start character makes it a palindrome
+            if (isPalindrome(s, start + 1, end)) {
+                return start;
+            }
+            // Check if removing the end character makes it a palindrome
+            if (isPalindrome(s, start, end - 1)) {
+                return end;
+            }
+            // If neither removal works, it's not possible to make a palindrome
+            return -1;
+        }
+        start++;
+        end--;
+    }
+
+    // The string is already a palindrome
+    return -1;
+}
+
+int main() {
+    int q;
+    scanf("%d", &q);
+    while (q--) {
+        char s[100006];
+        scanf("%s", s);
+        printf("%d\n", palindromeIndex(s));
+    }
+    return 0;
+}
