@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 
-// Helper function to print a grid
 void printGrid(int r, int c, char grid[r][c]) {
     for (int i = 0; i < r; i++) {
         for (int j = 0; j < c; j++) {
@@ -39,7 +38,6 @@ int main() {
     // Now n is odd and n >= 3
     char temp_grid[r][c];
     
-    // The state before detonation is a full grid of bombs
     for (int i = 0; i < r; i++) {
         for (int j = 0; j < c; j++) {
             temp_grid[i][j] = 'O';
@@ -47,8 +45,7 @@ int main() {
     }
 
     if ((n % 4) == 3) {
-        // Detonation of bombs from initial state (t=0)
-        // A temporary map to identify all cells to be cleared
+        
         char clear_map[r][c];
         for (int i = 0; i < r; i++) {
             for (int j = 0; j < c; j++) {
@@ -59,7 +56,6 @@ int main() {
         for (int i = 0; i < r; i++) {
             for (int j = 0; j < c; j++) {
                 if (grid[i][j] == 'O') {
-                    // Mark this cell and its neighbors for clearing
                     clear_map[i][j] = 'C'; // 'C' for cleared
                     if (i > 0) clear_map[i - 1][j] = 'C';
                     if (i < r - 1) clear_map[i + 1][j] = 'C';
@@ -78,8 +74,7 @@ int main() {
         }
         printGrid(r, c, temp_grid);
     } else { // n % 4 == 1 (and n >= 5)
-        // Detonation of bombs planted at t=2 (these were the initial empty cells)
-        char clear_map[r][c];
+       
         for (int i = 0; i < r; i++) {
             for (int j = 0; j < c; j++) {
                 clear_map[i][j] = 'N';
@@ -89,8 +84,7 @@ int main() {
         for (int i = 0; i < r; i++) {
             for (int j = 0; j < c; j++) {
                 if (grid[i][j] == '.') {
-                    // Bombs were planted in these empty cells at t=2
-                    // Mark them and their neighbors to be cleared at t=5
+                    
                     clear_map[i][j] = 'C';
                     if (i > 0) clear_map[i - 1][j] = 'C';
                     if (i < r - 1) clear_map[i + 1][j] = 'C';
