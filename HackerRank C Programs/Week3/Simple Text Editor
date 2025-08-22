@@ -1,0 +1,88 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// A simple stack implementation to store string states
+#define MAX_STATES 100000 // Constraint: Q <= 10^5
+char *history[MAX_STATES];
+int top = -1;
+
+// Pushes a copy of a string onto the stack
+void push(char *s) {
+    if (top < MAX_STATES - 1) {
+        history[++top] = strdup(s);
+    }
+}
+
+// Pops a string from the stack and returns its pointer
+char* pop() {
+    if (top >= 0) {
+        return history[top--];
+    }
+    return NULL;
+}
+
+int main() {
+    int Q, type, k;
+    char W[1000001]; // Buffer for the string to be appended (max length 10^6)
+    
+    // Allocate memory for the current string on the heap from the beginning.
+    // This is crucial for consistent memory management with `strdup`.
+    char *current_s = (char *)malloc(1000001 * sizeof(char));
+    if (current_s == NULL) {
+        // Handle memory allocation failure
+        return 1;
+    }
+    current_s[0] = '\0'; // Initialize as an empty string
+
+    // Read the number of operations
+    scanf("%d", &Q);
+
+    for (int i = 0; i < Q; i++) {
+        scanf("%d", &type);
+
+        switch (type) {
+            case 1: // Append
+                scanf("%s", W);
+                push(current_s);
+                strcat(current_s, W);
+                break;
+
+            case 2: // Delete
+                scanf("%d", &k);
+                push(current_s);
+                int len = strlen(current_s);
+                if (k <= len) {
+                    current_s[len - k] = '\0';
+                } else {
+                    current_s[0] = '\0'; // Deletes the entire string if k is too large
+                }
+                break;
+
+            case 3: // Print
+                scanf("%d", &k);
+                int current_len = strlen(current_s);
+                if (k > 0 && k <= current_len) {
+                    printf("%c\n", current_s[k - 1]);
+                }
+                break;
+
+            case 4: // Undo
+                if (top >= 0) {
+                    // Free the memory of the current string
+                    free(current_s); 
+                    // Pop the previous state from the stack and assign it
+                    current_s = pop(); 
+                }
+                break;
+        }
+    }
+
+    // Clean up memory before exiting
+    free(current_s);
+    while (top >= 0) {
+        free(pop());
+    }
+
+    return 0;
+}
